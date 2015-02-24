@@ -33,7 +33,8 @@
 
 from threading import enumerate as activethreads
 
-from os import fstat
+import os
+stat_method = getattr(os, 'fstat', os.stat)
 from hashlib import new as newhashlib
 from time import time
 from StringIO import StringIO
@@ -276,7 +277,8 @@ class PithosClient(PithosRestClient):
             meta = self.get_container_info()
         blocksize = int(meta['x-container-block-size'])
         blockhash = meta['x-container-block-hash']
-        size = size if size is not None else fstat(fileobj.fileno()).st_size
+        size = size if (
+            size is not None) else stat_method(fileobj.fileno()).st_size
         nblocks = 1 + (size - 1) // blocksize
         return (blocksize, blockhash, size, nblocks)
 

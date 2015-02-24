@@ -39,9 +39,9 @@ from sys import version_info
 import kamaki
 
 
-optional = ['ansicolors', 'mock>=1.0.1']
+optional = ['mock>=1.0.1', ]
 
-requires = ['objpool>=0.2', 'progress>=1.1', 'astakosclient>=0.14.10', 'python-dateutil']
+requires = ['objpool>=0.2', 'astakosclient>=0.14.10', 'python-dateutil']
 
 if version_info < (2, 7):
     requires.append('argparse')
@@ -61,12 +61,6 @@ setup(
     maintainer_email='synnefo-devel@googlegroups.com',
     packages=[
         'kamaki',
-        'kamaki.cli',
-        'kamaki.cli.utils',
-        'kamaki.cli.config',
-        'kamaki.cli.argument',
-        'kamaki.cli.cmds',
-        'kamaki.cli.cmdtree',
         'kamaki.clients',
         'kamaki.clients.utils',
         'kamaki.clients.astakos',
@@ -93,10 +87,6 @@ setup(
         ],
     include_package_data=True,
     entry_points={
-        'console_scripts': [
-            'kamaki = kamaki.cli:run_one_cmd',
-            'kamaki-shell = kamaki.cli:run_shell'
-        ]
     },
     install_requires=requires
 )
